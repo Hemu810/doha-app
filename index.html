@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthData - GenAI Suite</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <a href="index.html" class="header-logo"><img src="doloxe_logo.png" alt="HealthData Logo" class="logo-image"></a>
+            <div class="header-title"><h1>GenAI Suite</h1></div>
+            <div class="header-right"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/1280px-Microsoft_logo_%282012%29.svg.png" alt="Microsoft Logo" class="ms-logo"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- View 1: Initial Search Screen (Always visible at the top) -->
+        <div id="searchView">
+            <div class="intro-box">
+                <h2>Introducing Generative AI Solutions</h2>
+                <p>Select your data sources, then ask a question to analyze data across healthcare, MedTech, and pharma.</p>
+            </div>
+            <div class="db-tabs-container" id="dbTabs">
+                <button class="db-tab active">Master DB</button>
+                <button class="db-tab">Drugs DB</button>
+                <button class="db-tab">Sales Forecast DB</button>
+                <button class="db-tab">Patents DB</button>
+                <button class="db-tab">Drug Pricing DB</button>
+                <button class="db-tab">Market Access</button>
+                <button class="db-tab">Clinical Trials DB</button>
+                <button class="db-tab">Companies DB</button>
+                <button class="db-tab">Deals DB</button>
+                <button class="db-tab">Epidemiology DB</button>
+                <button class="db-tab">Manufacturing DB</button>
+                <button class="db-tab">Exim DB</button>
+            </div>
+            <div class="search-section">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Ask anything about the selected databases...">
+                </div>
+            </div>
+        </div>
+
+        <!-- This container holds all switchable result views -->
+        <div id="resultsContainer">
+            <div id="loadingIndicator" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Contacting GenAI... Analyzing selected databases...</p>
+            </div>
+
+            <div id="summaryView" class="summary-view-grid hidden">
+                <div class="summary-left">
+                    <h3 class="summary-title">Summary of Findings</h3>
+                    <p id="summaryText"></p>
+                </div>
+                <div class="summary-right" id="moduleButtonsContainer"></div>
+            </div>
+
+            <div id="detailedView" class="hidden">
+                <div class="detail-header">
+                    <button id="backButton" class="back-button"><i class="fa-solid fa-arrow-left"></i> Back to Summary</button>
+                    <h2 id="detailsTitle" class="details-main-title"></h2>
+                </div>
+                <div class="insight-summary card">
+                    <h3><i class="fa-solid fa-wand-magic-sparkles"></i> AI-Generated Detailed Summary</h3>
+                    <p id="aiSummaryText"></p>
+                </div>
+                <div class="data-tables card">
+                    <h3><i class="fa-solid fa-table"></i> Detailed Data</h3>
+                    <div id="tableContainer"></div>
+                    <button id="exportButton" class="export-button"><i class="fa-solid fa-download"></i> Export as CSV</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="main-footer">
+        <p>&copy; 2025 HealthData - GenAI Suite. All Rights Reserved.</p>
+    </footer>
+
+    <!-- A single JavaScript file to control all the logic -->
+    <script src="app.js"></script>
+</body>
+</html>
