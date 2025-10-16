@@ -12,10 +12,20 @@ from langchain_openai import AzureChatOpenAI
 from langchain_community.agent_toolkits import create_sql_agent
 
 # --- INITIALIZATION ---
-load_dotenv("/etc/secrets/.env")  # Load secrets from Render's secure Secret File
+load_dotenv("/etc/secrets/.env") if os.path.exists("/etc/secrets/.env") else load_dotenv()
 app = Flask(__name__)
 CORS(app)
 api_details_cache = {}
+
+# --- ENVIRONMENT VALIDATION ---
+required_env_vars = [
+    "DB_SERVER", "DB_PORT", "DB_DATABASE", "DB_USERNAME", "DB_PASSWORD",
+    "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_KEY", "AZURE_API_VERSION", "AZURE_OPENAI_DEPLOYMENT_NAME"
+]
+missing_vars = [var for var in required_env_vars if not os.getenv(var)]
+if missing_vars:
+    print(f"❌ Missing required environment variables: {missing_vars}")
+    sys.exit(1)
 
 # --- DATABASE AND AI SETUP ---
 MODULE_TO_TABLE_MAP = {
@@ -30,7 +40,7 @@ TABLE_TO_MODULE_MAP = {
 
 # --- SQL Server Connection via pymssql.connect ---
 SERVER = os.getenv("DB_SERVER")
-PORT = os.getenv("DB_PORT", "1433")
+PORT = os.getenv("DB_PORT")
 DATABASE = os.getenv("DB_DATABASE")
 USERNAME = os.getenv("DB_USERNAME")
 PASSWORD = os.getenv("DB_PASSWORD")
